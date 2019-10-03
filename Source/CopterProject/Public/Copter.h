@@ -17,22 +17,23 @@ public:
 	// Sets default values for this pawn's properties
 	ACopter();
 	
-
-private:
-
-
 protected:
 	
-	UFUNCTION(BlueprintCallable)
-	void StateUpdate();
+	// Updates current copter's state parameters (roll, pitch, yaw, altitude, etc.)
+	UFUNCTION(BlueprintCallable, meta = (BlueprintProtected))
+	virtual void StateUpdate();
 
-	UFUNCTION (BlueprintCallable)
-	void ControlUpdate();
+	// Updates copter's control input
+	UFUNCTION(BlueprintCallable, meta = (BlueprintProtected))
+	virtual void ControlUpdate();
 
+	// Initializes PID controller with new parameters
 	virtual void InitializePid();
 
+	// Updates PID's current state values (roll, pitch, yaw, altitude)
 	virtual void PidUpdate();
 
+	// Calculates PID value
 	virtual void PidCompute();
 
 	UPROPERTY(Category = "PID_Controller", VisibleAnywhere, BlueprintReadOnly)
@@ -49,35 +50,31 @@ protected:
 
 	UPROPERTY(Category = "Copter", VisibleAnywhere, BlueprintReadOnly)
 		class USkeletalMeshComponent* Mesh;
-
-
-
-	int64* Millis;
-
+	   
 	bool bIsKeepBearing;
 		
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float RollIn;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float RollOut;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float PitchIn;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float PitchOut;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float YawIn;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float YawOut;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float AltitudeIn;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Control")
+	UPROPERTY(BlueprintReadOnly)
 		float AltitudeOut;
 
 
@@ -151,10 +148,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
 		FPID RollPID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Roll")
 		float RollPidMin;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Roll")
 		float RollPidMax;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Roll")
@@ -173,10 +170,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
 		FPID PitchPID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Pitch")
 		float PitchPidMin;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Pitch")
 		float PitchPidMax;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Pitch")
@@ -195,10 +192,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
 		FPID YawPID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Yaw")
 		float YawPidMin;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|PID")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Yaw")
 		float YawPidMax;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Yaw")
@@ -227,13 +224,13 @@ public:
 		float AltitudeSetpoint;
 	
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Configuration|Throttle")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Throttle")
 		float ThrottleMin = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Throttle")
 		float ThrottleMid;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Configuration|Throttle")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Throttle")
 		float ThrottleMax = 100;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Configuration|Throttle")

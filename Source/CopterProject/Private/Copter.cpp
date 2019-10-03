@@ -33,7 +33,6 @@ ACopter::ACopter()
 void ACopter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 
@@ -47,6 +46,7 @@ void ACopter::Tick(float DeltaTime)
 	{
 		FlyTimeMillis += FMath::RoundToInt(DeltaTime * 1000);
 		StateUpdate();
+		ControlUpdate();
 	}	
 }
 
@@ -61,8 +61,13 @@ float ACopter::AddCopterThrottleInput_Implementation(float Value)
 {
 	if (IsPowerOn)
 	{
-		//Throttle = FMath::GetMappedRangeValueClamped(FVector2D(0, 100), FVector2D(ThrottleZero,100), ((Value * 50) + 50));
-		Throttle = (Value * 50) + 50;
+		if (Value >= 0.1)
+			Throttle = FMath::Clamp(Value * 50, ThrottleMid, ThrottleMax);
+		else if (Value <= -0.1)
+			Throttle = FMath::Clamp(Value * 50, ThrottleMin, ThrottleMid);
+		else Throttle = ThrottleMid;
+
+		
 		if (FMath::Abs(Value) >= 0.1) AltitudeSetpoint = Altitude + (Value * AltitudeW);
 	}	
 	return Throttle;

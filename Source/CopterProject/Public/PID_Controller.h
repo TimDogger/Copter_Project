@@ -7,7 +7,7 @@
 #include "PID_Controller.generated.h"
 
 
-USTRUCT(BlueprintType)
+USTRUCT(BlueprintType, Category = "Copter")
 struct FPID
 {
 	GENERATED_BODY()
@@ -86,9 +86,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FPID Pid;
 
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int64 SampleTime;*/
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float SampleTime;
 	
@@ -96,37 +93,27 @@ public:
 	float OutMin;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		float OutMax;
+	float OutMax;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		bool bInAuto;
-
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int64 LastTime;*/
+	bool bInAuto;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		float ITerm;
+	float ITerm;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		float LastInput;
+	float LastInput;
 
 private:
 	void Initialize();
 
-	float GetError(float, float);
-
 	FPID DispPid;		
 	
 	float* DeltaTime;
-		
-	int64* Millis;
 
 	float* MyInput;
 
 	float* MyOutput;
 
 	float* MySetpoint;
-
-	
-	
 };
