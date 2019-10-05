@@ -103,7 +103,9 @@ float ACopter::AddCopterYawInput_Implementation(float Value)
 	{
 		float yawDelta = Value * YawW;
 
-		YawSetpoint = yawDelta + Bearing;
+		YawSetpoint = yawDelta;
+
+		/*YawSetpoint = yawDelta + Bearing;
 		if (bIsKeepBearing && YawSetpoint > 0 && YawSetpoint < 360)
 		{
 			YawSetpoint = yawDelta + Yaw;
@@ -113,7 +115,11 @@ float ACopter::AddCopterYawInput_Implementation(float Value)
 		{
 			bIsKeepBearing = true;
 			Bearing = Yaw;
-		}			
+		}			*/
+	}
+	else
+	{
+		YawSetpoint = 0;
 	}
 	return YawSetpoint;
 }
@@ -127,7 +133,7 @@ bool ACopter::StartFly_Implementation()
 
 	StateUpdate();
 
-	YawSetpoint = Bearing;
+	YawSetpoint = 0;
 	bIsKeepBearing = true;
 	AltitudeSetpoint = Altitude - 100;
 	RollSetpoint = Roll;
@@ -163,7 +169,7 @@ void ACopter::PidUpdate()
 {
 	RollIn = Roll;
 	PitchIn = Pitch;
-	YawIn = Bearing;
+	YawIn = YawOut;
 	AltitudeIn = Altitude;
 }
 

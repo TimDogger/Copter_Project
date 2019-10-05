@@ -16,17 +16,19 @@ FPID::FPID(float NewP, float NewI, float NewD)
 }
 
 
+/*
 // Sets default values for this component's properties
 UPID_Controller::UPID_Controller()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-	UPID_Controller::bAutoActivate = true;
+	//PrimaryComponentTick.bCanEverTick = true;
+	//UPID_Controller::bAutoActivate = true;
 
 
 	// ...
 }
+
 
 // Called when the game starts
 void UPID_Controller::BeginPlay()
@@ -43,7 +45,7 @@ void UPID_Controller::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	// ...
-}
+}*/
 
 void UPID_Controller::Connect(float* Input, float* Output, float* Setpoint,
 	FPID NewPid, int ControllerDirection, float* NewDeltaTime)

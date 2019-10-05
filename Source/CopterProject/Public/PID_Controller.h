@@ -32,15 +32,15 @@ class COPTERPROJECT_API UPID_Controller : public UActorComponent
 
 public:	
 	// Sets default values for this component's properties
-	UPID_Controller();
+	//UPID_Controller();
 	
 protected:
 	// Called when the game starts
-	virtual void BeginPlay() override;
+	//virtual void BeginPlay() override;
 
 public:	
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	//virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
 	void SetTunings(FPID Pid);
